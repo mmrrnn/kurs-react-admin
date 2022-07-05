@@ -93,33 +93,3 @@ const dataProvider = {
 };
 
 export default dataProvider;
-
-// import { DataProvider } from "react-admin";
-
-// import { AuthorDataProvider } from "./dataProviders/AuthorDataProvider";
-
-// export const dataProvider = (): DataProvider => {
-//   const resources: any = {};
-//   resources['authors'] = new AuthorDataProvider();
-
-//   return {
-//     create: async (resource, params) =>
-//       resources[resource].create(resource, params),
-//     delete: async (resource, params) =>
-//       resources[resource].delete(resource, params),
-//     deleteMany: async (resource, params) =>
-//       resources[resource].deleteMany(resource, params),
-//     getList: async (resource, params) =>
-//       resources[resource].getList(resource, params),
-//     getMany: async (resource, params) =>
-//       resources[resource].getMany(resource, params),
-//     getManyReference: async (resource, params) =>
-//       resources[resource].getManyReference(resource, params),
-//     getOne: async (resource, params) =>
-//       resources[resource].getOne(resource, params),
-//     update: async (resource, params) =>
-//       resources[resource].update(resource, params),
-//     updateMany: async (resource, params) =>
-//       resources[resource].updateMany(resource, params),
-//   };
-// };
