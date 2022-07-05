@@ -1,19 +1,22 @@
-// @ts-nocheck
-import { fetchUtils } from "react-admin";
+import { DataProvider, fetchUtils } from "react-admin";
 import { stringify } from "query-string";
-import { RequestQueryBuilder } from "@nestjsx/crud-request";
+import {
+  CondOperator,
+  QuerySort,
+  RequestQueryBuilder,
+} from "@nestjsx/crud-request";
 
 const apiUrl = "http://localhost:8080";
 const httpClient = fetchUtils.fetchJson;
 
-const dataProvider = {
+const dataProvider: DataProvider = {
   getList: async (resource, params) => {
     const { pagination, sort } = params;
 
     const queryString = RequestQueryBuilder.create()
       .setLimit(pagination.perPage)
       .setPage(pagination.page)
-      .sortBy(sort)
+      .sortBy(sort as QuerySort)
       .query();
 
     const url = `${apiUrl}/${resource}?${queryString}`;
@@ -35,22 +38,23 @@ const dataProvider = {
   },
 
   getManyReference: (resource, params) => {
-    const { page, perPage } = params.pagination;
-    const { field, order } = params.sort;
-    const query = {
-      sort: JSON.stringify([field, order]),
-      range: JSON.stringify([(page - 1) * perPage, page * perPage - 1]),
-      filter: JSON.stringify({
-        ...params.filter,
-        [params.target]: params.id,
-      }),
-    };
-    const url = `${apiUrl}/${resource}?${stringify(query)}`;
+    const { pagination, sort, filter } = params;
 
-    return httpClient(url).then(({ headers, json }) => ({
-      data: json,
-      total: parseInt(headers.get("content-range").split("/").pop(), 10),
-    }));
+    const queryString = RequestQueryBuilder.create({
+      filter: filter.push({
+        field: params.target,
+        operator: CondOperator.EQUALS,
+        value: params.id,
+      }),
+    })
+      .setLimit(pagination.perPage)
+      .setPage(pagination.page)
+      .sortBy(sort as QuerySort)
+      .query();
+
+    const url = `${apiUrl}/${resource}?${queryString}`;
+
+    return httpClient(url).then(({ json }) => json);
   },
 
   update: (resource, params) =>
