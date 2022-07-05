@@ -17,6 +17,7 @@ const dataProvider: DataProvider = {
       .setLimit(pagination.perPage)
       .setPage(pagination.page)
       .sortBy(sort as QuerySort)
+      .resetCache()
       .query();
 
     const url = `${apiUrl}/${resource}?${queryString}`;
