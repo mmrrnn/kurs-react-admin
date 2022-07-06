@@ -11,12 +11,6 @@ export const AuthorsList: React.FC = (props) => {
     <List {...props}>
       <Datagrid rowClick="show">
         <TextField source="id" />
-        {/* <ArrayField label="books" source="books">
-          <Datagrid>
-            <TextField source="id" />
-            <TextField source="title" />
-          </Datagrid>
-        </ArrayField> */}
         <TextField source="firstName" />
         <TextField source="lastName" />
       </Datagrid>

@@ -1,17 +1,21 @@
 import React from "react";
-import { Datagrid, List, TextField } from "react-admin";
+import {
+  Datagrid,
+  List,
+  ReferenceField,
+  TextField,
+} from "react-admin";
 
 export const BooksList: React.FC = (props) => {
   return (
     <List {...props}>
       <Datagrid rowClick="show">
         <TextField source="id" />
-        {/* <ReferenceField label="Author" source="author" reference="authors">
-          <TextField source="firstName" />
+        <ReferenceField label="Author" source="author.id" reference="authors">
           <TextField source="lastName" />
-        </ReferenceField> */}
+        </ReferenceField>
         <TextField source="title" />
       </Datagrid>
     </List>
-  )
-}
+  );
+};
