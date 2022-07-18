@@ -1,0 +1,41 @@
+name: "Deploy Mpapiez admin panel"
+
+on:
+  push:
+    branches:
+      - master
+
+env:
+  SKIP_PREFLIGHT_CHECK: true
+  NODE_VERSION: 16.10.0
+  ARTIFACTS_BUCKET_NAME: mpapiez-admin.rumblefish.dev
+  AWS_EC2_METADATA_DISABLED: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-20.04
+    steps:
+      - name: "Checkout"
+        uses: actions/checkout@v3
+        with:
+          persist-credentials: false
+
+      - name: "Use Node.js v${{ env.NODE_VERSION }}"
+        uses: actions/setup-node@master
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+
+      - name: Install npm dependencies
+        run: npm ci
+
+      - name: Build
+        run: npm run build
+
+      - name: Uppload to S3
+        run: |
+          (cd build/ && zip -r admin-panel.zip *)
+          aws s3 cp build/admin-panel.zip \
+             s3://$ARTIFACTS_BUCKET_NAME/admin-panel.zip
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}

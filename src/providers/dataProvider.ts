@@ -22,7 +22,7 @@ import {
   mergeEncodedQueries,
 } from "./utils";
 
-const apiUrl = "http://localhost:8080";
+const apiUrl = process.env.API_URL || "https://mpapiez-nest-api.rumblefish.dev";
 const httpClient = fetchUtils.fetchJson;
 
 const dataProvider: DataProvider = {
