@@ -35,7 +35,7 @@ jobs:
         run: |
           (cd build/ && zip -r admin-panel.zip *)
           aws s3 cp build/admin-panel.zip \
-             s3://$ARTIFACTS_BUCKET_NAME/admin-panel.zip
+             s3://$ARTIFACTS_BUCKET_NAME/current/admin-panel.zip
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
