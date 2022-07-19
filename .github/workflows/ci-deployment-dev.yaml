@@ -8,7 +8,7 @@ on:
 env:
   SKIP_PREFLIGHT_CHECK: true
   NODE_VERSION: 16.10.0
-  ARTIFACTS_BUCKET_NAME: mpapiez-admin.rumblefish.dev
+  ARTIFACTS_BUCKET_NAME: artifacts-dev-marcin-kurs
   AWS_EC2_METADATA_DISABLED: true
 
 jobs:
@@ -31,7 +31,7 @@ jobs:
       - name: Build
         run: npm run build
 
-      - name: Uppload to S3
+      - name: Upload to S3
         run: |
           (cd build/ && zip -r admin-panel.zip *)
           aws s3 cp build/admin-panel.zip \

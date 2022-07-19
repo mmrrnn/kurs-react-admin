@@ -5,5 +5,6 @@ export const MyLayout = (props: any) => (
   <>
     <Layout {...props} />
     <ReactQueryDevtools initialIsOpen={false} />
+    <footer>dupa</footer>
   </>
 );
