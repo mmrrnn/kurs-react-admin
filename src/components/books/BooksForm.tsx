@@ -27,7 +27,9 @@ export const BooksForm = (props: any): JSX.Element => {
         reference="authors"
         InputLabelProps={{ shrink: true }}
       >
-        <SelectInput optionText="lastName" />
+        <SelectInput
+          optionText={(author) => `${author.firstName} ${author.lastName}`}
+        />
       </ReferenceInput>
       <FileInput source="files" label="Cover image" accept="image/*">
         <FileField source="image" title="image" />

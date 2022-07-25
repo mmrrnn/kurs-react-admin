@@ -11,10 +11,15 @@ export const BooksShow: React.FC | undefined = (props) => {
   return (
     <Show {...props}>
       <TabbedShowLayout>
-        <Tab label="User main info">
+        <Tab label="Book main info">
           <TextField source="id" />
           <TextField source="title" />
-          <ReferenceField label="Author" source="author.id" reference="authors">
+          <ReferenceField
+            label="Author"
+            source="author.id"
+            reference="authors"
+            link="show"
+          >
             <>
               <TextField source="firstName" /> <TextField source="lastName" />
             </>
