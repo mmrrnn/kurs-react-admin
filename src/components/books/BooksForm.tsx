@@ -1,4 +1,11 @@
-import { ReferenceInput, SelectInput, SimpleForm, TextInput } from "react-admin";
+import {
+  FileField,
+  FileInput,
+  ReferenceInput,
+  SelectInput,
+  SimpleForm,
+  TextInput,
+} from "react-admin";
 
 export const BooksForm = (props: any): JSX.Element => {
   return (
@@ -22,6 +29,9 @@ export const BooksForm = (props: any): JSX.Element => {
       >
         <SelectInput optionText="lastName" />
       </ReferenceInput>
+      <FileInput source="files" label="Cover image" accept="image/*">
+        <FileField source="image" title="image" />
+      </FileInput>
     </SimpleForm>
   );
 };

@@ -15,7 +15,9 @@ export const BooksShow: React.FC | undefined = (props) => {
           <TextField source="id" />
           <TextField source="title" />
           <ReferenceField label="Author" source="author.id" reference="authors">
-            <TextField source="firstName" /> <TextField source="lastName" />
+            <>
+              <TextField source="firstName" /> <TextField source="lastName" />
+            </>
           </ReferenceField>
         </Tab>
       </TabbedShowLayout>
