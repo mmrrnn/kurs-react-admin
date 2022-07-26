@@ -32,7 +32,7 @@ export const BooksForm = (props: any): JSX.Element => {
         />
       </ReferenceInput>
       <FileInput source="files" label="Cover image" accept="image/*">
-        <FileField source="image" title="image" />
+        <FileField source="src" title="image" />
       </FileInput>
     </SimpleForm>
   );

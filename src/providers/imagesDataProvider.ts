@@ -10,14 +10,10 @@ export class ImagesDataProvider extends ResourceDataProvider<Image> {
   ): Promise<CreateResult<Image>> {
     const url = `${this.url}/${resource}`;
 
-    console.log("Creating body for POST /images", params.data);
-
     const { json } = await this.httpClient(url, {
       body: JSON.stringify(params.data),
       method: "POST",
     });
-
-    console.log("Received JSON from POST /images", json);
 
     return {
       data: {
@@ -26,17 +22,11 @@ export class ImagesDataProvider extends ResourceDataProvider<Image> {
     };
   }
 
-  public async convertFileToBase64(blob?: Blob): Promise<any> {
-    if (!blob) {
-      return null;
-    }
+  public async convertFileUriToBlob(fileUri: string): Promise<any> {
+    const resp = await fetch(fileUri);
+    const imageBody = await resp.blob();
 
-    return new Promise((resolve, reject) => {
-      const reader = new FileReader();
-      reader.readAsDataURL(blob);
-      reader.addEventListener("load", () => resolve(reader.result));
-      reader.addEventListener("error", reject);
-    });
+    return imageBody;
   }
 
   public async upload(presignedUrl: string, image: Blob): Promise<any> {

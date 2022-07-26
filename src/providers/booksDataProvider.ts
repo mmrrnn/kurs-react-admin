@@ -16,7 +16,7 @@ export class BooksDataProvider extends ResourceDataProvider<Book> {
     // Create book
     const { data: book } = await super.create(resource, { data: rest });
 
-    // Contruct data params to create Image 
+    // Contruct data params to create Image
     const fileExt = files.rawFile.type.split("/")[1];
     const imageData = {
       extension: fileExt,
@@ -30,8 +30,8 @@ export class BooksDataProvider extends ResourceDataProvider<Book> {
     )) as any;
 
     // Construct blob to upload it
-    const imageBlob = await this.imagesDataProvider.convertFileToBase64(
-      files.rawFile
+    const imageBlob = await this.imagesDataProvider.convertFileUriToBlob(
+      files.src
     );
 
     // upload blob image to presigned url
