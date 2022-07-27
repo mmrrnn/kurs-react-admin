@@ -10,7 +10,7 @@ export class BooksDataProvider extends ResourceDataProvider<Book> {
     super();
   }
 
-  public async create(resource: string, params: CreateParams): Promise<any> {
+  public async create(resource: string, params: CreateParams) {
     const { files, ...rest } = params.data;
 
     // Create book

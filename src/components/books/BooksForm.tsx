@@ -7,7 +7,7 @@ import {
   TextInput,
 } from "react-admin";
 
-export const BooksForm = (props: any): JSX.Element => {
+export const BooksForm: React.FC = (props) => {
   return (
     <SimpleForm {...props}>
       <TextInput

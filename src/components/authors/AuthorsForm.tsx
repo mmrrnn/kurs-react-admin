@@ -1,6 +1,6 @@
 import { SimpleForm, TextInput } from "react-admin";
 
-export const AuthorsForm = (props: any): JSX.Element => {
+export const AuthorsForm: React.FC = (props) => {
   return (
     <SimpleForm {...props}>
       <TextInput
