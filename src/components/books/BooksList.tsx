@@ -2,7 +2,6 @@ import React from "react";
 import {
   Datagrid,
   FunctionField,
-  ImageField,
   List,
   ReferenceField,
   TextField,
@@ -27,7 +26,6 @@ export const BooksList: React.FC = (props) => {
           />
         </ReferenceField>
         <TextField source="title" />
-        <ImageField source="image.path" title="book cover" />
       </Datagrid>
     </List>
   );

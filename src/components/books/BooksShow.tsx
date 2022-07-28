@@ -1,6 +1,5 @@
 import React from "react";
 import {
-  ImageField,
   ReferenceField,
   Show,
   Tab,
@@ -25,7 +24,6 @@ export const BooksShow: React.FC | undefined = (props) => {
               <TextField source="firstName" /> <TextField source="lastName" />
             </>
           </ReferenceField>
-          <ImageField source="image.path" title="book cover" />
         </Tab>
       </TabbedShowLayout>
     </Show>
