@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - master
+      - Task_9
 
 env:
   SKIP_PREFLIGHT_CHECK: true
