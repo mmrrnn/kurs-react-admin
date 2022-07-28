@@ -1,4 +1,6 @@
 import {
+  FileField,
+  FileInput,
   ReferenceInput,
   SelectInput,
   SimpleForm,
@@ -29,6 +31,9 @@ export const BooksForm: React.FC = (props) => {
           optionText={(author) => `${author.firstName} ${author.lastName}`}
         />
       </ReferenceInput>
+      <FileInput source="files" label="Cover image" accept="image/*">
+        <FileField source="src" title="image" />
+      </FileInput>
     </SimpleForm>
   );
 };

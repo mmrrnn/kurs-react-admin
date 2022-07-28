@@ -10,3 +10,10 @@ export type Book = {
   title: string;
   authorId: number;
 }
+
+export type Image = {
+  id: string;
+  path: string;
+  bookId: number;
+  status: number;
+}

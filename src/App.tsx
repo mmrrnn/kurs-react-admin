@@ -1,5 +1,5 @@
 import { Admin, Resource } from "react-admin";
-import dataProvider from "./providers/dataProvider";
+import { createDataProvider } from "./providers/createDataProvider";
 import { MyLayout } from "./Layout";
 import { AuthorsList } from "./components/authors/AuthorsList";
 import { BooksList } from "./components/books/BooksList";
@@ -9,6 +9,8 @@ import { AuthorsEdit } from "./components/authors/AuthorsEdit";
 import { AuthorsCreate } from "./components/authors/AuthorsCreate";
 import { BooksEdit } from "./components/books/BooksEdit";
 import { BooksCreate } from "./components/books/BooksCreate";
+
+const dataProvider = createDataProvider();
 
 const App = () => (
   <Admin dataProvider={dataProvider} layout={MyLayout}>
