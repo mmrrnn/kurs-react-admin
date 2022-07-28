@@ -5,6 +5,6 @@ export const MyLayout = (props: any) => (
   <>
     <Layout {...props} />
     <ReactQueryDevtools initialIsOpen={false} />
-    <footer>Version 1.929429492</footer>
+    <footer>Version 2.0</footer>
   </>
 );
