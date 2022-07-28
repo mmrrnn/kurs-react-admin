@@ -9,11 +9,12 @@ export type Book = {
   id: number;
   title: string;
   authorId: number;
+  image: Image | null;
+  imageId: string | null;
 }
 
 export type Image = {
   id: string;
   path: string;
-  bookId: number;
   status: number;
 }

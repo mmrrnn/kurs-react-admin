@@ -1,9 +1,16 @@
 import { CreateParams } from "react-admin";
 import { DataProviderResource } from "../consts";
-import { Book } from "../types/entities";
+import { Book, Image } from "../types/entities";
 import { ImagesDataProvider } from "./imagesDataProvider";
 
 import { ResourceDataProvider } from "./resourceDataProvider";
+
+type CreateImageResponse = {
+  data: {
+    image: Image;
+    presignedUrl: string;
+  };
+};
 
 export class BooksDataProvider extends ResourceDataProvider<Book> {
   constructor(public imagesDataProvider: ImagesDataProvider) {
@@ -11,34 +18,41 @@ export class BooksDataProvider extends ResourceDataProvider<Book> {
   }
 
   public async create(resource: string, params: CreateParams) {
+    let imageId: string | null = null;
     const { files, ...rest } = params.data;
 
+    // Upload cover image if passed
+    if (files?.rawFile) {
+      const fileExt = files.rawFile.type.split("/")[1];
+      const imageDTO = {
+        extension: fileExt,
+      };
+
+      const respImage = (await this.imagesDataProvider.create(
+        DataProviderResource.images,
+        { data: imageDTO }
+      )) as unknown as CreateImageResponse;
+
+      const imageBlob = await this.imagesDataProvider.convertFileUriToBlob(
+        files.src
+      );
+
+      // upload blob image to presigned url
+      await this.imagesDataProvider.upload(
+        respImage.data.presignedUrl,
+        imageBlob
+      );
+
+      imageId = respImage?.data?.image?.id;
+    }
+
+    const bookDto = {
+      ...rest,
+      imageId
+    }
+
     // Create book
-    const { data: book } = await super.create(resource, { data: rest });
-
-    // Contruct data params to create Image
-    const fileExt = files.rawFile.type.split("/")[1];
-    const imageData = {
-      extension: fileExt,
-      bookId: book.id,
-    };
-
-    // Create cover for already created book
-    const respImage = (await this.imagesDataProvider.create(
-      DataProviderResource.images,
-      { data: imageData }
-    )) as any;
-
-    // Construct blob to upload it
-    const imageBlob = await this.imagesDataProvider.convertFileUriToBlob(
-      files.src
-    );
-
-    // upload blob image to presigned url
-    await this.imagesDataProvider.upload(
-      respImage.data.presignedUrl,
-      imageBlob
-    );
+    const { data: book } = await super.create(resource, { data: bookDto });
 
     return { data: book };
   }

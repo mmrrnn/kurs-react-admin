@@ -27,7 +27,7 @@ export const BooksList: React.FC = (props) => {
           />
         </ReferenceField>
         <TextField source="title" />
-        <ImageField source="image.path" title="book cover" />
+        <ImageField source="image.url" title="book cover" />
       </Datagrid>
     </List>
   );

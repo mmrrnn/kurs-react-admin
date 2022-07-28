@@ -49,7 +49,6 @@ export class ResourceDataProvider<DataType extends KeyValueType> {
     resource: string,
     params: CreateParams
   ): Promise<CreateResult<DataType>> {
-    console.log(`${this.url}/${resource}`, JSON.stringify(params.data))
     return this.httpClient(`${this.url}/${resource}`, {
       body: JSON.stringify(params.data),
       method: "POST",

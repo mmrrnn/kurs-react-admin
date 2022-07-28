@@ -25,7 +25,7 @@ export const BooksShow: React.FC | undefined = (props) => {
               <TextField source="firstName" /> <TextField source="lastName" />
             </>
           </ReferenceField>
-          <ImageField source="image.path" title="book cover" />
+          <ImageField source="image.url" title="book cover" />
         </Tab>
       </TabbedShowLayout>
     </Show>
